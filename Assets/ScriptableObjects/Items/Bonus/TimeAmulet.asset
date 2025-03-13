@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a354067ef5fe11e40bb07c928732df65, type: 3}
+  m_Name: TimeAmulet
+  m_EditorClassIdentifier: 
+  ID: 17
+  ItemName: Time Amulet
+  ItemType: 2
+  Description: Reduces crafting time by 2 seconds
+  Icon: {fileID: -3993190775973903853, guid: 94b9b4894c3416c4c8e83be9a88f4939, type: 3}
+  IsStackable: 0
+  _successRateBonus: 0
+  _craftingTimeReduction: 2
+  _minimumCraftingTime: 1
+  BonusEffectType: 1

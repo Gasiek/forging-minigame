@@ -6,6 +6,7 @@ public class Item : ScriptableObject
     public int ID;
     public string ItemName;
     public ItemType ItemType;
+    [TextArea(1, 2)]
     public string Description;
     public Sprite Icon;
     public bool IsStackable;

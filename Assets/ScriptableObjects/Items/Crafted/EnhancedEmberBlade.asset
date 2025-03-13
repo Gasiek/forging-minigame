@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666ad95020e185243ba84a2db138d7cc, type: 3}
+  m_Name: EnhancedEmberBlade
+  m_EditorClassIdentifier: 
+  ID: 13
+  ItemName: Enhanced Ember Blade
+  ItemType: 1
+  Description: Upgraded Ember Blade with runic enhancements
+  Icon: {fileID: -6392669640846280154, guid: 0bb49e6f09731ab42b73cd26cdc9c2e6, type: 3}
+  IsStackable: 0

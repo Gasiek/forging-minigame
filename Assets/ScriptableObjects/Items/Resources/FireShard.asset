@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666ad95020e185243ba84a2db138d7cc, type: 3}
+  m_Name: FireShard
+  m_EditorClassIdentifier: 
+  ID: 3
+  ItemName: Fire Shard
+  ItemType: 0
+  Description: "Elemental crystal that provides heat and a slight\r\nenchantment\r"
+  Icon: {fileID: -548897134188906539, guid: b3c4354d78014a24d9535b00200e8fae, type: 3}
+  IsStackable: 1

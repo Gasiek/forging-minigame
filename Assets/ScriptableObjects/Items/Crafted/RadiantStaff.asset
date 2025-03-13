@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666ad95020e185243ba84a2db138d7cc, type: 3}
+  m_Name: RadiantStaff
+  m_EditorClassIdentifier: 
+  ID: 12
+  ItemName: Radiant Staff
+  ItemType: 1
+  Description: 'Enchanted staff requiring Flame-Gold Ingot + Ember
+
+    Dust'
+  Icon: {fileID: 6927841775874001932, guid: e9350ad5396a3b04cad4016457916728, type: 3}
+  IsStackable: 0

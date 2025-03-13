@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666ad95020e185243ba84a2db138d7cc, type: 3}
+  m_Name: DraconicCrown
+  m_EditorClassIdentifier: 
+  ID: 15
+  ItemName: Draconic Crown
+  ItemType: 1
+  Description: "Royal headpiece forged with Flame-Gold Ingot +\r\nDragon Scale\r"
+  Icon: {fileID: -6912034311097347541, guid: 2b41f8717efa1bf42a5053b0576e826f, type: 3}
+  IsStackable: 0
