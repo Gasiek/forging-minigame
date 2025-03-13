@@ -5,17 +5,12 @@ using System.Collections.Generic;
 public class Recipe : ScriptableObject
 {
     public MachineType MachineRequired;
-    public List<ItemQuantity> InputItems;
+    public List<Item> InputItems;
     public Item OutputItem;
+    [Tooltip("Crafting time in seconds.")]
     public float CraftingTime;
+    [Tooltip("Probability value between 0 and 1.")]
     public float SuccessRate;
-}
-
-[System.Serializable]
-public struct ItemQuantity
-{
-    public Item Item;
-    public int Quantity;
 }
 
 public enum MachineType

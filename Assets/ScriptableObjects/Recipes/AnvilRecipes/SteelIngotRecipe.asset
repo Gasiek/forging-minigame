@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d0a76bf8897e43b24378d97c7d6d9, type: 3}
+  m_Name: SteelIngotRecipe
+  m_EditorClassIdentifier: 
+  MachineRequired: 1
+  InputItems:
+  - {fileID: 11400000, guid: 031639060799b0242b828bae5ba81cac, type: 2}
+  - {fileID: 11400000, guid: 9af8751a19e599e4a95f0cb44acdf605, type: 2}
+  OutputItem: {fileID: 11400000, guid: 6a6baf35d814d4744b73dce56dc3d408, type: 2}
+  CraftingTime: 4
+  SuccessRate: 0.9

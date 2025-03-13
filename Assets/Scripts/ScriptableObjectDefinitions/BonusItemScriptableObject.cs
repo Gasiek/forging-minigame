@@ -3,7 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Bonus Item", menuName = "ForgingGame/BonusItem")]
 public class BonusItem : Item, IBonusEffect
 {
+    [Tooltip("How much the succes rate should increase. 10% = 0.1.")]
     [SerializeField] private float _successRateBonus = 0.1f;
+    [Tooltip("Crafting time reduction in seconds")]
     [SerializeField] private float _craftingTimeReduction = 2f;
     [SerializeField] private float _minimumCraftingTime = 1f;
 

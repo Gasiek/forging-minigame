@@ -5,11 +5,11 @@ public class InventoryManager : MonoBehaviour
 {
     private Dictionary<Item, int> _inventory = new Dictionary<Item, int>();
 
-    public bool HasItems(List<ItemQuantity> items)
+    public bool HasItems(List<Item> items)
     {
         foreach (var item in items)
         {
-            if (!_inventory.ContainsKey(item.Item) || _inventory[item.Item] < item.Quantity)
+            if (!_inventory.ContainsKey(item))
                 return false;
         }
         return true;
@@ -23,15 +23,15 @@ public class InventoryManager : MonoBehaviour
             _inventory[item] = quantity;
     }
 
-    public void RemoveItems(List<ItemQuantity> items)
+    public void RemoveItems(List<Item> items)
     {
         foreach (var item in items)
         {
-            if (_inventory.ContainsKey(item.Item))
+            if (_inventory.ContainsKey(item))
             {
-                _inventory[item.Item] -= item.Quantity;
-                if (_inventory[item.Item] <= 0)
-                    _inventory.Remove(item.Item);
+                _inventory[item] -= 1;
+                if (_inventory[item] <= 0)
+                    _inventory.Remove(item);
             }
         }
     }

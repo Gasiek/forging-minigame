@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d0a76bf8897e43b24378d97c7d6d9, type: 3}
+  m_Name: EnhancedEmberBladeRecipe
+  m_EditorClassIdentifier: 
+  MachineRequired: 3
+  InputItems:
+  - {fileID: 11400000, guid: 73501d75d14bfb24081e1aa758bd76f3, type: 2}
+  - {fileID: 11400000, guid: ef0b73d13fcc9a740b2d590bdf7fb920, type: 2}
+  OutputItem: {fileID: 11400000, guid: c7a672ce844bb034a9612d709423b57e, type: 2}
+  CraftingTime: 4
+  SuccessRate: 0.85
