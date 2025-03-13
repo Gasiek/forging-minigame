@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "ForgingGame/Item")]
 public class Item : ScriptableObject

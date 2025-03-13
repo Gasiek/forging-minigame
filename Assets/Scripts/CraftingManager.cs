@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CraftingManager
@@ -14,11 +16,26 @@ public class CraftingManager
         if (_inventory.HasItems(recipe.InputItems))
         {
             _inventory.RemoveItems(recipe.InputItems);
-            float successChance = Random.Range(0f, 1f);
-            if (successChance <= recipe.SuccessRate)
+            
+            float finalSuccessRate = recipe.SuccessRate;
+            float finalCraftingTime = recipe.CraftingTime;
+
+            List<BonusItem> activeBonuses = _inventory.GetBonusItems();
+            foreach (var bonus in activeBonuses)
             {
-                _inventory.AddItem(recipe.OutputItem, 1);
+                bonus.ApplyEffect(ref finalSuccessRate, ref finalCraftingTime);
             }
+            
+            _inventory.StartCoroutine(CraftingCoroutine(recipe.OutputItem, finalSuccessRate, finalCraftingTime));
+        }
+    }
+
+    private IEnumerator CraftingCoroutine(Item outputItem, float successRate, float craftingTime)
+    {
+        yield return new WaitForSeconds(craftingTime);
+        if (Random.Range(0f, 1f) <= successRate)
+        {
+            _inventory.AddItem(outputItem, 1);
         }
     }
 }

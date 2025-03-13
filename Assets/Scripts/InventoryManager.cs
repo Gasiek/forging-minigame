@@ -35,4 +35,17 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    
+    public List<BonusItem> GetBonusItems()
+    {
+        List<BonusItem> activeBonuses = new List<BonusItem>();
+        foreach (var item in _inventory.Keys)
+        {
+            if (item is BonusItem bonusItem)
+            {
+                activeBonuses.Add(bonusItem);
+            }
+        }
+        return activeBonuses;
+    }
 }
