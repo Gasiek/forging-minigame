@@ -12,7 +12,7 @@ public class CraftingSlot : InventorySlot
             if (!draggedInventorySlot.IsEmpty())
             {
                 CurrentItem = draggedInventorySlot.CurrentItem;
-                _slotImage.sprite = CurrentItem.Icon;
+                SlotImage.sprite = CurrentItem.Icon;
                 draggedInventorySlot.Quantity--;
             }
         }

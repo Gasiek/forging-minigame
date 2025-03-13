@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    [SerializeField] protected Image _slotImage;
+    public Image SlotImage;
     [SerializeField] protected TextMeshProUGUI _quantityText;
     [SerializeField] protected GameObject _quantityGameObject;
     public Item CurrentItem;
@@ -20,7 +21,12 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             UpdateQuantityUI();
         }
     }
-    
+
+    private void Awake()
+    {
+        Quantity = 0;
+    }
+
     private void UpdateQuantityUI()
     {
         if (_quantity <= 0)
@@ -38,7 +44,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (CurrentItem != null && !IsEmpty())
         {
-            DragIcon.Instance.SetSprite(_slotImage.sprite);
+            DragIcon.Instance.SetSprite(SlotImage.sprite);
             DragIcon.Instance.gameObject.SetActive(true);
             DragIcon.Instance.SetPosition(eventData.position);
             DragIcon.Instance.SetCount(Quantity);
@@ -70,7 +76,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             if (!draggedInventorySlot.IsEmpty())
             {
                 CurrentItem = draggedInventorySlot.CurrentItem;
-                _slotImage.sprite = CurrentItem.Icon;
+                SlotImage.sprite = CurrentItem.Icon;
                 draggedInventorySlot.Quantity--;
             }
         }
