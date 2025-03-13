@@ -93,6 +93,7 @@ MonoBehaviour:
   SlotImage: {fileID: 8048078533566335708}
   _quantityText: {fileID: 992981852456165433}
   _quantityGameObject: {fileID: 8319828453195480292}
+  _emptySprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   CurrentItem: {fileID: 0}
 --- !u!1 &8319828453195480292
 GameObject:

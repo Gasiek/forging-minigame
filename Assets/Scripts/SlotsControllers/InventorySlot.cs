@@ -9,9 +9,11 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image SlotImage;
     [SerializeField] protected TextMeshProUGUI _quantityText;
     [SerializeField] protected GameObject _quantityGameObject;
+    [SerializeField] protected Sprite _emptySprite;
     public Item CurrentItem;
-    
+
     private int _quantity;
+
     public int Quantity
     {
         get => _quantity;
@@ -24,7 +26,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private void Awake()
     {
-        Quantity = 0;
+        Clear();
     }
 
     private void UpdateQuantityUI()
@@ -32,12 +34,21 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (_quantity <= 0)
         {
             _quantityGameObject.SetActive(false);
+            SlotImage.sprite = _emptySprite;
         }
         else
         {
             _quantityGameObject.SetActive(true);
         }
+
         _quantityText.text = _quantity.ToString();
+    }
+
+    public void Clear()
+    {
+        CurrentItem = null;
+        Quantity = 0;
+        SlotImage.sprite = _emptySprite;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -71,13 +82,35 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public virtual void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && eventData.pointerDrag.TryGetComponent(out InventorySlot draggedInventorySlot))
+        if (eventData.pointerDrag != null &&
+            eventData.pointerDrag.TryGetComponent(out InventorySlot draggedInventorySlot))
         {
-            if (!draggedInventorySlot.IsEmpty())
+            if (!IsEmpty())
+            {
+                if (draggedInventorySlot.CurrentItem.ItemName == CurrentItem.ItemName)
+                {
+                    Quantity += draggedInventorySlot.Quantity;
+                    draggedInventorySlot.Clear();
+                }
+                else
+                {
+                    var tempItem = draggedInventorySlot.CurrentItem;
+                    var tempQuantity = draggedInventorySlot.Quantity;
+                    var tempSprite = draggedInventorySlot.SlotImage.sprite;
+                    draggedInventorySlot.CurrentItem = CurrentItem;
+                    draggedInventorySlot.Quantity = Quantity;
+                    draggedInventorySlot.SlotImage.sprite = SlotImage.sprite;
+                    CurrentItem = tempItem;
+                    Quantity = tempQuantity;
+                    SlotImage.sprite = tempSprite;
+                }
+            }
+            else
             {
                 CurrentItem = draggedInventorySlot.CurrentItem;
-                SlotImage.sprite = CurrentItem.Icon;
-                draggedInventorySlot.Quantity--;
+                Quantity = draggedInventorySlot.Quantity;
+                SlotImage.sprite = draggedInventorySlot.SlotImage.sprite;
+                draggedInventorySlot.Clear();
             }
         }
     }

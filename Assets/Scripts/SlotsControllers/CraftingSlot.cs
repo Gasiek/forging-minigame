@@ -9,10 +9,11 @@ public class CraftingSlot : InventorySlot
     {
         if (eventData.pointerDrag != null && eventData.pointerDrag.TryGetComponent(out InventorySlot draggedInventorySlot))
         {
-            if (!draggedInventorySlot.IsEmpty())
+            if (IsEmpty())
             {
                 CurrentItem = draggedInventorySlot.CurrentItem;
                 SlotImage.sprite = CurrentItem.Icon;
+                Quantity = 1;
                 draggedInventorySlot.Quantity--;
             }
         }
