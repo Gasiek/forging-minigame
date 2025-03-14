@@ -90,11 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9f673ce91673a45bec802857688e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotImage: {fileID: 8048078533566335708}
+  _slotImage: {fileID: 8048078533566335708}
   _quantityText: {fileID: 992981852456165433}
   _quantityGameObject: {fileID: 8319828453195480292}
   _emptySprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  CurrentItem: {fileID: 0}
 --- !u!1 &8319828453195480292
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,49 +3,107 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private Dictionary<Item, int> _inventory = new Dictionary<Item, int>();
+    [SerializeField] private InventorySlot[] _inventorySlots;
+    [SerializeField] private InventorySlot[] _bonusSlots;
 
-    public bool HasItems(List<Item> items)
+    private void Awake()
     {
-        foreach (var item in items)
+        for (int i = 0; i < _inventorySlots.Length; i++)
         {
-            if (!_inventory.ContainsKey(item))
-                return false;
+            _inventorySlots[i].Initialize(this, i);
         }
-        return true;
+
+        for (int i = 0; i < _bonusSlots.Length; i++)
+        {
+            _bonusSlots[i].Initialize(this, i);
+        }
     }
 
     public void AddItem(Item item, int quantity)
     {
-        if (_inventory.ContainsKey(item))
-            _inventory[item] += quantity;
-        else
-            _inventory[item] = quantity;
+        foreach (var slot in _inventorySlots)
+        {
+            if (slot.Item == item)
+            {
+                slot.AddQuantity(quantity);
+                return;
+            }
+        }
+
+        foreach (var slot in _inventorySlots)
+        {
+            if (slot.IsEmpty)
+            {
+                slot.SetItem(item, quantity);
+                return;
+            }
+        }
+
+        Debug.LogWarning("Inventory full! Couldn’t add item.");
     }
 
-    public void RemoveItems(List<Item> items)
+    public void AddBonusItem(BonusItem bonusItem)
     {
-        foreach (var item in items)
+        for (int i = 0; i < _bonusSlots.Length; i++)
         {
-            if (_inventory.ContainsKey(item))
+            if (_bonusSlots[i].Item.ItemName == bonusItem.ItemName) return;
+        }
+
+        for (int i = 0; i < _bonusSlots.Length; i++)
+        {
+            if (_bonusSlots[i].IsEmpty)
             {
-                _inventory[item] -= 1;
-                if (_inventory[item] <= 0)
-                    _inventory.Remove(item);
+                _bonusSlots[i].SetItem(bonusItem, 1);
+                return;
             }
         }
     }
-    
-    public List<BonusItem> GetBonusItems()
+
+    public void RemoveItem(Item item, int quantity)
     {
-        List<BonusItem> activeBonuses = new List<BonusItem>();
-        foreach (var item in _inventory.Keys)
+        foreach (var slot in _inventorySlots)
         {
-            if (item is BonusItem bonusItem)
+            if (slot.Item == item)
             {
-                activeBonuses.Add(bonusItem);
+                slot.RemoveQuantity(quantity);
+                if (slot.Quantity <= 0)
+                {
+                    slot.Clear();
+                }
+
+                return;
             }
         }
-        return activeBonuses;
+    }
+
+    public void SwapSlots(int fromIndex, int toIndex)
+    {
+        var fromSlot = _inventorySlots[fromIndex];
+        var toSlot = _inventorySlots[toIndex];
+        var tempItem = fromSlot.Item;
+        var tempQuantity = fromSlot.Quantity;
+
+        fromSlot.SetItem(toSlot.Item, toSlot.Quantity);
+        toSlot.SetItem(tempItem, tempQuantity);
+
+        fromSlot.UpdateUI();
+        toSlot.UpdateUI();
+    }
+
+    public InventorySlot GetSlot(int index)
+    {
+        return _inventorySlots[index];
+    }
+
+    public List<BonusItem> GetBonusItems()
+    {
+        List<BonusItem> bonusItems = new List<BonusItem>();
+        foreach (var slot in _bonusSlots)
+        {
+            if (slot.Item == null) continue;
+            bonusItems.Add(slot.Item as BonusItem);
+        }
+
+        return bonusItems;
     }
 }

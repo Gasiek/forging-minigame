@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,59 +5,87 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    public Image SlotImage;
-    [SerializeField] protected TextMeshProUGUI _quantityText;
-    [SerializeField] protected GameObject _quantityGameObject;
-    [SerializeField] protected Sprite _emptySprite;
-    public Item CurrentItem;
+    [SerializeField] private Image _slotImage;
+    [SerializeField] private TextMeshProUGUI _quantityText;
+    [SerializeField] private GameObject _quantityGameObject;
+    [SerializeField] private Sprite _emptySprite;
 
-    private int _quantity;
+    public Item Item { get; private set; }
+    public int Quantity { get; private set; }
+    public bool IsEmpty => Item == null || Quantity <= 0;
+    protected InventoryManager _inventoryManager;
+    private int _slotIndex;
 
-    public int Quantity
+    public void Initialize(InventoryManager inventoryManager, int slotIndex)
     {
-        get => _quantity;
-        set
-        {
-            _quantity = value;
-            UpdateQuantityUI();
-        }
-    }
-
-    private void Awake()
-    {
+        _inventoryManager = inventoryManager;
+        _slotIndex = slotIndex;
         Clear();
     }
 
-    private void UpdateQuantityUI()
+    public void SetItem(Item item, int quantity)
     {
-        if (_quantity <= 0)
-        {
-            _quantityGameObject.SetActive(false);
-            SlotImage.sprite = _emptySprite;
-        }
-        else
-        {
-            _quantityGameObject.SetActive(true);
-        }
+        Item = item;
+        Quantity = quantity;
+        UpdateUI();
+    }
 
-        _quantityText.text = _quantity.ToString();
+    public void AddQuantity(int amount)
+    {
+        if (Item != null)
+        {
+            Quantity += amount;
+            UpdateUI();
+        }
+    }
+
+    public void RemoveQuantity(int amount)
+    {
+        if (Item != null)
+        {
+            Quantity -= amount;
+            if (Quantity <= 0)
+            {
+                Clear();
+            }
+            else
+            {
+                UpdateUI();
+            }
+        }
     }
 
     public void Clear()
     {
-        CurrentItem = null;
+        Item = null;
         Quantity = 0;
-        SlotImage.sprite = _emptySprite;
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        if (IsEmpty)
+        {
+            _slotImage.sprite = _emptySprite;
+            _quantityGameObject.SetActive(false);
+        }
+        else
+        {
+            _slotImage.sprite = Item.Icon;
+            _quantityText.text = Quantity.ToString();
+            _quantityGameObject.SetActive(true);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (CurrentItem != null && !IsEmpty())
+        if (!IsEmpty)
         {
-            DragIcon.Instance.SetSprite(SlotImage.sprite);
+            Debug.Log("OnBeginDrag");
+            DragIcon.Instance.SetSprite(_slotImage.sprite);
+            DragIcon.Instance.SetCount(Quantity);
             DragIcon.Instance.gameObject.SetActive(true);
             DragIcon.Instance.SetPosition(eventData.position);
-            DragIcon.Instance.SetCount(Quantity);
         }
     }
 
@@ -75,42 +102,56 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         DragIcon.Instance.gameObject.SetActive(false);
     }
 
-    public bool IsEmpty()
-    {
-        return Quantity <= 0;
-    }
-
     public virtual void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null &&
-            eventData.pointerDrag.TryGetComponent(out InventorySlot draggedInventorySlot))
+        if (eventData.pointerDrag != null)
         {
-            if (!IsEmpty())
+            if (eventData.pointerDrag.TryGetComponent(out CraftedSlot draggedCraftedSlot))
             {
-                if (draggedInventorySlot.CurrentItem.ItemName == CurrentItem.ItemName)
+                Debug.Log("Dragging crafted slot");
+                if (IsEmpty)
                 {
-                    Quantity += draggedInventorySlot.Quantity;
-                    draggedInventorySlot.Clear();
+                    SetItem(draggedCraftedSlot.Item, draggedCraftedSlot.Quantity);
+                    draggedCraftedSlot.Clear();
                 }
-                else
+                else if (draggedCraftedSlot.Item == Item)
                 {
-                    var tempItem = draggedInventorySlot.CurrentItem;
-                    var tempQuantity = draggedInventorySlot.Quantity;
-                    var tempSprite = draggedInventorySlot.SlotImage.sprite;
-                    draggedInventorySlot.CurrentItem = CurrentItem;
-                    draggedInventorySlot.Quantity = Quantity;
-                    draggedInventorySlot.SlotImage.sprite = SlotImage.sprite;
-                    CurrentItem = tempItem;
-                    Quantity = tempQuantity;
-                    SlotImage.sprite = tempSprite;
+                    AddQuantity(draggedCraftedSlot.Quantity);
+                    draggedCraftedSlot.Clear();
                 }
+
+                return;
             }
-            else
+
+            if (eventData.pointerDrag.TryGetComponent(out CraftingSlot draggedCraftingSlot))
             {
-                CurrentItem = draggedInventorySlot.CurrentItem;
-                Quantity = draggedInventorySlot.Quantity;
-                SlotImage.sprite = draggedInventorySlot.SlotImage.sprite;
-                draggedInventorySlot.Clear();
+                Debug.Log("Dragging crafting slot");
+                if (IsEmpty)
+                {
+                    SetItem(draggedCraftingSlot.Item, draggedCraftingSlot.Quantity);
+                    draggedCraftingSlot.Clear();
+                }
+                else if (draggedCraftingSlot.Item == Item)
+                {
+                    AddQuantity(draggedCraftingSlot.Quantity);
+                    draggedCraftingSlot.Clear();
+                }
+
+                return;
+            }
+
+            if (eventData.pointerDrag.TryGetComponent(out InventorySlot draggedSlot))
+            {
+                Debug.Log("Dragging slot");
+                if (draggedSlot == this) return;
+                if (draggedSlot.Item == Item)
+                {
+                    AddQuantity(draggedSlot.Quantity);
+                    draggedSlot.Clear();
+                    return;
+                }
+
+                _inventoryManager.SwapSlots(draggedSlot._slotIndex, _slotIndex);
             }
         }
     }

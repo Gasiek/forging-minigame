@@ -122,11 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d57389798b64840b18956ff4ef9c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotImage: {fileID: 6076980811711033345}
+  _slotImage: {fileID: 6076980811711033345}
   _quantityText: {fileID: 3900828296811813604}
   _quantityGameObject: {fileID: 5228880331325228601}
   _emptySprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  CurrentItem: {fileID: 0}
 --- !u!114 &3900828296811813604 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 992981852456165433, guid: 32b9f3c785286a84db13a82b35fa8438, type: 3}
