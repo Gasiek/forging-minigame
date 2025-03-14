@@ -16,6 +16,6 @@ MonoBehaviour:
   InputItems:
   - {fileID: 11400000, guid: 17c98117ac8c2834aa5f55df0ed0d6a3, type: 2}
   - {fileID: 11400000, guid: 9af8751a19e599e4a95f0cb44acdf605, type: 2}
-  OutputItem: {fileID: 11400000, guid: 6a6baf35d814d4744b73dce56dc3d408, type: 2}
+  OutputItem: {fileID: 11400000, guid: 9279369197bff0145bef503134bd05b0, type: 2}
   CraftingTime: 5
   SuccessRate: 0.85

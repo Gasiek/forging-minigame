@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 91703756336075264}
   - component: {fileID: 7678415696747035139}
   - component: {fileID: 8402201876111621529}
+  - component: {fileID: 2291267228795516275}
   m_Layer: 5
   m_Name: Forge
   m_TagString: Untagged
@@ -95,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82398536f6a6754895bf9e33da6d648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machineCanvasGroup: {fileID: 2291267228795516275}
   _craftingSlots:
   - {fileID: 6526630467194754101}
   - {fileID: 2665906666941479714}
@@ -108,6 +110,18 @@ MonoBehaviour:
   _craftingSlotsCanvasGroup:
   - {fileID: 5188063537283258256}
   - {fileID: 4148862425903020167}
+--- !u!225 &2291267228795516275
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294078581100373329}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &790970642246696952
 GameObject:
   m_ObjectHideFlags: 0

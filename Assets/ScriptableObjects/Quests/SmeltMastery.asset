@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SmeltMastery
   m_EditorClassIdentifier: 
   QuestName: Smelt Mastery
+  QuestDescription: Craft 5 Iron Ingots
   RequiredItem: {fileID: 11400000, guid: 031639060799b0242b828bae5ba81cac, type: 2}
   RequiredAmount: 5
-  CurrentProgress: 0
+  CurrentProgress: 5
   MachineToUnlock: 3

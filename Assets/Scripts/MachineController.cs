@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MachineController : MonoBehaviour, IMachine
 {
     private InventoryManager _inventoryManager;
+    [SerializeField] private CanvasGroup machineCanvasGroup;
     [SerializeField] private CraftingSlot[] _craftingSlots;
     [SerializeField] private CraftedSlot _craftedSlot;
     [SerializeField] private Recipe[] _availableRecipes;
@@ -166,6 +167,7 @@ public class MachineController : MonoBehaviour, IMachine
             _craftedSlot.SetItem(outputItem, 1);
             SetCraftingSlotsInteractable(true);
             Debug.Log($"{outputItem.ItemName} crafted successfully!");
+            CraftingEvents.ItemCrafted(outputItem);
         }
         else
         {
@@ -183,5 +185,11 @@ public class MachineController : MonoBehaviour, IMachine
             craftingSlotCanvasGroup.alpha = interactable ? 1f : 0.5f;
             craftingSlotCanvasGroup.blocksRaycasts = interactable;
         }
+    }
+
+    public void UnlockThisNewMachine()
+    {
+        machineCanvasGroup.alpha = 1;
+        machineCanvasGroup.interactable = true;
     }
 }
