@@ -10,6 +10,8 @@ public class CraftingSlot : InventorySlot
         if (eventData.pointerDrag != null &&
             eventData.pointerDrag.TryGetComponent(out InventorySlot draggedSlot))
         {
+            if(draggedSlot.IsEmpty) return;
+            if(!IsEmpty) return;
             if (draggedSlot == this) return;
             SetItem(draggedSlot.Item, 1);
             draggedSlot.RemoveQuantity(1);

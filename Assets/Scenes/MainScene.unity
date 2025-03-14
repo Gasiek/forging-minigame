@@ -1161,6 +1161,10 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 1449064000}
+    - target: {fileID: 7540723093191577729, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3687422982976160562, guid: 41964bde83f93504bbee74fcf0b24eff, type: 3}
     - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: _craftingSlots.Array.size
       value: 2
@@ -2557,6 +2561,10 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 1480857368}
+    - target: {fileID: 7540723093191577729, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7692690932639535609, guid: 38e2b365eb871ee42a7fc0f7d8be3e94, type: 3}
     - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: _craftingSlots.Array.size
       value: 2
@@ -3087,6 +3095,10 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 904508223}
+    - target: {fileID: 7540723093191577729, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3974293702141752974, guid: ed7c052c1e412a84ca79d8edffc2df46, type: 3}
     - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: _availableRecipes.Array.size
       value: 2
@@ -3213,6 +3225,9 @@ MonoBehaviour:
   _bonusSlots:
   - {fileID: 698999241}
   - {fileID: 1068197527}
+  _bonusUIElements:
+  - {fileID: 407775240113782762}
+  - {fileID: 1860287199}
 --- !u!4 &1481010985
 Transform:
   m_ObjectHideFlags: 0
@@ -3837,6 +3852,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82398536f6a6754895bf9e33da6d648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1860287199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2302639328614077156, guid: f6cd67c818599d143b0e7af284208234, type: 3}
+  m_PrefabInstance: {fileID: 710676275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed082b8de2265c8419128e5d69ebd3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1865780118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1326861849260439166, guid: 2dd972a55ca49d2478b63ff6718662be, type: 3}
@@ -4283,6 +4309,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 143408541095486424, guid: f6cd67c818599d143b0e7af284208234, type: 3}
   m_PrefabInstance: {fileID: 407775240113782758}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &407775240113782762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2302639328614077156, guid: f6cd67c818599d143b0e7af284208234, type: 3}
+  m_PrefabInstance: {fileID: 407775240113782758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed082b8de2265c8419128e5d69ebd3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2796719660159218332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4584,6 +4621,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 87
       objectReference: {fileID: 0}
+    - target: {fileID: 7540723093191577729, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3881324236535122659, guid: 4aa3586001a2fe940a817576f03bc1a0, type: 3}
     - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: _craftingSlots.Array.size
       value: 1
@@ -5076,7 +5117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152.38321, y: -1013.4165}
+  m_AnchoredPosition: {x: -106, y: -945}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7903425356604095352

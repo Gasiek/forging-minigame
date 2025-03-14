@@ -28,6 +28,7 @@ public class QuestManager : MonoBehaviour
             if (i < _questUIElements.Count)
             {
                 _questUIMap[_quests[i]] = _questUIElements[i];
+                _quests[i].CurrentProgress = 0;
                 _questUIElements[i].UpdateUI(_quests[i].QuestName, _quests[i].QuestDescription, _quests[i].CurrentProgress, _quests[i].RequiredAmount);
             }
         }

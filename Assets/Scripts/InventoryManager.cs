@@ -5,6 +5,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private InventorySlot[] _inventorySlots;
     [SerializeField] private InventorySlot[] _bonusSlots;
+    [SerializeField] private List<BonusUIElement> _bonusUIElements;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (_bonusSlots[i].IsEmpty)
             {
+                _bonusUIElements[i].UpdateUI(bonusItem.ItemName, bonusItem.Description);
                 _bonusSlots[i].SetItem(bonusItem, 1);
                 return;
             }

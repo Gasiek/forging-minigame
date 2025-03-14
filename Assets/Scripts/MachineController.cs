@@ -112,6 +112,7 @@ public class MachineController : MonoBehaviour, IMachine
     public void StartCrafting(Recipe recipe)
     {
         IsAvailable = false;
+        SetCraftingSlotsInteractable(false);
         Debug.Log($"Starting crafting: {recipe.OutputItem.ItemName}");
 
         _craftButton.interactable = false;
@@ -119,6 +120,7 @@ public class MachineController : MonoBehaviour, IMachine
         {
             slot.OnItemSlotChanged -= OnItemSlotChanged;
         }
+
         _progressBar.gameObject.SetActive(true);
         _progressBar.fillAmount = 0;
 
@@ -155,6 +157,7 @@ public class MachineController : MonoBehaviour, IMachine
         {
             slot.Clear();
         }
+
         foreach (var slot in _craftingSlots)
         {
             slot.OnItemSlotChanged += OnItemSlotChanged;
@@ -165,7 +168,6 @@ public class MachineController : MonoBehaviour, IMachine
         if (Random.Range(0f, 1f) <= successRate)
         {
             _craftedSlot.SetItem(outputItem, 1);
-            SetCraftingSlotsInteractable(true);
             Debug.Log($"{outputItem.ItemName} crafted successfully!");
             CraftingEvents.ItemCrafted(outputItem);
         }
@@ -174,6 +176,7 @@ public class MachineController : MonoBehaviour, IMachine
             Debug.LogWarning($"Crafting of {outputItem.ItemName} failed.");
         }
 
+        SetCraftingSlotsInteractable(true);
         _possibleOutputText.text = "";
         IsAvailable = true;
     }

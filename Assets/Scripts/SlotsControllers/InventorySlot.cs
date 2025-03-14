@@ -15,6 +15,8 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public bool IsEmpty => Item == null || Quantity <= 0;
     protected InventoryManager _inventoryManager;
     private int _slotIndex;
+    private Item _oldItem;
+    private int _oldQuantity;
 
     public void Initialize(InventoryManager inventoryManager, int slotIndex)
     {
@@ -67,6 +69,12 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         UpdateUI();
     }
 
+    private void HideUI()
+    {
+        _slotImage.sprite = _emptySprite;
+        _quantityGameObject.SetActive(false);
+    }
+
     public void UpdateUI()
     {
         if (IsEmpty)
@@ -86,11 +94,11 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (!IsEmpty)
         {
-            Debug.Log("OnBeginDrag");
             DragIcon.Instance.SetSprite(_slotImage.sprite);
             DragIcon.Instance.SetCount(Quantity);
             DragIcon.Instance.gameObject.SetActive(true);
             DragIcon.Instance.SetPosition(eventData.position);
+            HideUI();
         }
     }
 
@@ -105,6 +113,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         DragIcon.Instance.gameObject.SetActive(false);
+        UpdateUI();
     }
 
     public virtual void OnDrop(PointerEventData eventData)
@@ -113,7 +122,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             if (eventData.pointerDrag.TryGetComponent(out CraftedSlot draggedCraftedSlot))
             {
-                Debug.Log("Dragging crafted slot");
+                if (draggedCraftedSlot.IsEmpty) return;
                 if (IsEmpty)
                 {
                     SetItem(draggedCraftedSlot.Item, draggedCraftedSlot.Quantity);
@@ -124,13 +133,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     AddQuantity(draggedCraftedSlot.Quantity);
                     draggedCraftedSlot.Clear();
                 }
-
+                draggedCraftedSlot.UpdateUI();
                 return;
             }
 
             if (eventData.pointerDrag.TryGetComponent(out CraftingSlot draggedCraftingSlot))
             {
-                Debug.Log("Dragging crafting slot");
+                if (draggedCraftingSlot.IsEmpty) return;
                 if (IsEmpty)
                 {
                     SetItem(draggedCraftingSlot.Item, draggedCraftingSlot.Quantity);
@@ -141,13 +150,12 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     AddQuantity(draggedCraftingSlot.Quantity);
                     draggedCraftingSlot.Clear();
                 }
-
+                draggedCraftingSlot.UpdateUI();
                 return;
             }
-
             if (eventData.pointerDrag.TryGetComponent(out InventorySlot draggedSlot))
             {
-                Debug.Log("Dragging slot");
+                if (draggedSlot.IsEmpty) return;
                 if (draggedSlot == this) return;
                 if (draggedSlot.Item == Item)
                 {
