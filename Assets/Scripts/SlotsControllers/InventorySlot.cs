@@ -173,7 +173,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (!IsEmpty && Item != null)
         {
-            Tooltip.Instance.ShowTooltip(Item.ItemName); // Assuming Item has an "ItemName" property
+            Tooltip.Instance.ShowTooltip(Item.ItemName);
         }
     }
 

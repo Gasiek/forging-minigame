@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class MachineController : MonoBehaviour, IMachine
 {
     private InventoryManager _inventoryManager;
-    [SerializeField] private Button machineOpenPanelButton;
-    [SerializeField] private GameObject machineOpenPanelButtonPadlock;
+    [SerializeField] private ForgeUIElement forgeUIElement;
     [SerializeField] private CanvasGroup craftingPanelCanvasGroup;
     [SerializeField] private CraftingSlot[] _craftingSlots;
     [SerializeField] private CraftedSlot _craftedSlot;
@@ -194,8 +193,7 @@ public class MachineController : MonoBehaviour, IMachine
 
     public void UnlockThisNewMachine()
     {
-        machineOpenPanelButton.interactable = true;
-        machineOpenPanelButtonPadlock.SetActive(false);
+        forgeUIElement.UnlockForge();
     }
 
     public void ShowCraftingPanel()

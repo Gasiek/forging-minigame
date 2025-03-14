@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1593303895056762414}
   - component: {fileID: 1762435152848219835}
   - component: {fileID: 8910527960138190613}
+  - component: {fileID: 1107097076493891269}
   m_Layer: 5
   m_Name: Forge
   m_TagString: Untagged
@@ -133,6 +134,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1107097076493891269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4741612180494970283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df81b228dd71474e99da14bf1dad68f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _forgeName: Smelter
+  machineOpenPanelButton: {fileID: 8910527960138190613}
+  machineOpenPanelButtonPadlock: {fileID: 6245054975297330439}
 --- !u!1001 &3142978105245443228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,5 +249,10 @@ PrefabInstance:
 --- !u!224 &5443796032700519351 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6922637672418096939, guid: e68c2cf8bc0492a4b80fcf3391a1e676, type: 3}
+  m_PrefabInstance: {fileID: 3142978105245443228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6245054975297330439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9022114708561213851, guid: e68c2cf8bc0492a4b80fcf3391a1e676, type: 3}
   m_PrefabInstance: {fileID: 3142978105245443228}
   m_PrefabAsset: {fileID: 0}
