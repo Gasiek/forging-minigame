@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class MachineController : MonoBehaviour, IMachine
 {
     private InventoryManager _inventoryManager;
-    [SerializeField] private CanvasGroup machineCanvasGroup;
+    [SerializeField] private ForgeUIElement forgeUIElement;
+    [SerializeField] private CanvasGroup craftingPanelCanvasGroup;
     [SerializeField] private CraftingSlot[] _craftingSlots;
     [SerializeField] private CraftedSlot _craftedSlot;
     [SerializeField] private Recipe[] _availableRecipes;
@@ -44,9 +45,9 @@ public class MachineController : MonoBehaviour, IMachine
     {
         _currentRecipe = FindMatchingRecipe();
 
-        if (_currentRecipe != null)
+        if (_currentRecipe)
         {
-            _possibleOutputText.text = $"Can craft: {_currentRecipe.OutputItem.ItemName}";
+            _possibleOutputText.text = _currentRecipe.OutputItem.ItemName;
             _craftButton.interactable = true;
         }
         else
@@ -73,7 +74,7 @@ public class MachineController : MonoBehaviour, IMachine
 
         foreach (var slot in _craftingSlots)
         {
-            if (slot.Item != null)
+            if (slot.Item)
             {
                 itemsInSlots.Add(slot.Item);
             }
@@ -168,12 +169,11 @@ public class MachineController : MonoBehaviour, IMachine
         if (Random.Range(0f, 1f) <= successRate)
         {
             _craftedSlot.SetItem(outputItem, 1);
-            Debug.Log($"{outputItem.ItemName} crafted successfully!");
             CraftingEvents.ItemCrafted(outputItem);
         }
         else
         {
-            Debug.LogWarning($"Crafting of {outputItem.ItemName} failed.");
+            ToastNotificationManager.Instance.ShowNotification($"Crafting of {outputItem.ItemName} failed.");
         }
 
         SetCraftingSlotsInteractable(true);
@@ -192,7 +192,20 @@ public class MachineController : MonoBehaviour, IMachine
 
     public void UnlockThisNewMachine()
     {
-        machineCanvasGroup.alpha = 1;
-        machineCanvasGroup.interactable = true;
+        forgeUIElement.UnlockForge();
+    }
+
+    public void ShowCraftingPanel()
+    {
+        craftingPanelCanvasGroup.alpha = 1;
+        craftingPanelCanvasGroup.interactable = true; 
+        craftingPanelCanvasGroup.blocksRaycasts = true;
+    }
+
+    public void HideCraftingPanel()
+    {
+        craftingPanelCanvasGroup.alpha = 0;
+        craftingPanelCanvasGroup.interactable = false;
+        craftingPanelCanvasGroup.blocksRaycasts = false;
     }
 }

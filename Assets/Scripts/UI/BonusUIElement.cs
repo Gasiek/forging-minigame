@@ -1,15 +1,16 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BonusUIElement : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _bonusNameText;
     [SerializeField] private TextMeshProUGUI _bonusDescriptionText;
-    
-    public void UpdateUI(string bonusName, string bonusDescription)
+    [SerializeField] private InventorySlot _bonusSlot;
+
+    public void Initialize(BonusItem bonusItem)
     {
-        _bonusNameText.text = bonusName;
-        _bonusDescriptionText.text = bonusDescription;
+        _bonusNameText.text = bonusItem.ItemName;
+        _bonusDescriptionText.text = bonusItem.Description;
+        _bonusSlot.SetItem(bonusItem, 1);
     }
 }

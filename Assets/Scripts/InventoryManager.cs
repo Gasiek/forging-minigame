@@ -4,19 +4,15 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private InventorySlot[] _inventorySlots;
-    [SerializeField] private InventorySlot[] _bonusSlots;
-    [SerializeField] private List<BonusUIElement> _bonusUIElements;
+    [SerializeField] private GameObject _bonusUIPrefab;
+    [SerializeField] private Transform _bonusUIContainer;
+    private List<BonusItem> _bonusItems = new List<BonusItem>();
 
     private void Awake()
     {
         for (int i = 0; i < _inventorySlots.Length; i++)
         {
             _inventorySlots[i].Initialize(this, i);
-        }
-
-        for (int i = 0; i < _bonusSlots.Length; i++)
-        {
-            _bonusSlots[i].Initialize(this, i);
         }
     }
 
@@ -45,22 +41,16 @@ public class InventoryManager : MonoBehaviour
 
     public void AddBonusItem(BonusItem bonusItem)
     {
-        for (int i = 0; i < _bonusSlots.Length; i++)
-        {
-            if(_bonusSlots[i].IsEmpty) { continue; }
-            if (_bonusSlots[i].Item.ItemName == bonusItem.ItemName) return;
-        }
+        GameObject bonusUI = Instantiate(_bonusUIPrefab, _bonusUIContainer);
+        BonusUIElement bonusUIElement = bonusUI.GetComponent<BonusUIElement>();
+        bonusUIElement.Initialize(bonusItem);
 
-        for (int i = 0; i < _bonusSlots.Length; i++)
+        if (!_bonusItems.Exists(b => b.ItemName == bonusItem.ItemName))
         {
-            if (_bonusSlots[i].IsEmpty)
-            {
-                _bonusUIElements[i].UpdateUI(bonusItem.ItemName, bonusItem.Description);
-                _bonusSlots[i].SetItem(bonusItem, 1);
-                return;
-            }
+            _bonusItems.Add(bonusItem);
         }
     }
+
 
     public void RemoveItem(Item item, int quantity)
     {
@@ -100,13 +90,6 @@ public class InventoryManager : MonoBehaviour
 
     public List<BonusItem> GetBonusItems()
     {
-        List<BonusItem> bonusItems = new List<BonusItem>();
-        foreach (var slot in _bonusSlots)
-        {
-            if (slot.Item == null) continue;
-            bonusItems.Add(slot.Item as BonusItem);
-        }
-
-        return bonusItems;
+        return new List<BonusItem>(_bonusItems);
     }
 }

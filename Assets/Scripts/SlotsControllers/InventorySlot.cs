@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image _slotImage;
     [SerializeField] private TextMeshProUGUI _quantityText;
@@ -167,5 +167,18 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 _inventoryManager.SwapSlots(draggedSlot._slotIndex, _slotIndex);
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!IsEmpty && Item != null)
+        {
+            Tooltip.Instance.ShowTooltip(Item.ItemName);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.Instance.HideTooltip();
     }
 }

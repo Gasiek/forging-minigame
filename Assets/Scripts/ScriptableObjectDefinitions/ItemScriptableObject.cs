@@ -9,7 +9,6 @@ public class Item : ScriptableObject
     [TextArea(1, 2)]
     public string Description;
     public Sprite Icon;
-    public bool IsStackable;
 }
 
 public enum ItemType

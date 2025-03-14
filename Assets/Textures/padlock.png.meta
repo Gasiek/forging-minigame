@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d7fe211d3317eae48b6b987ae24c42fb
+guid: 0548bf888feada143a07df5a07b68d63
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3238581760505091059
-    second: ember_blade_0
+      213: 2860044062972993909
+    second: padlock_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +55,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ember_blade_0
+      name: padlock_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 58
         y: 0
-        width: 1024
-        height: 1024
+        width: 396
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f317f2d3f0c1fc20800000000000000
-      internalID: 3238581760505091059
+      spriteID: 571687f0ceae0b720800000000000000
+      internalID: 2860044062972993909
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ember_blade_0: 3238581760505091059
+      padlock_0: 2860044062972993909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -6,9 +6,13 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private List<Quest> _quests;
     [SerializeField] private MachineController _runeCarver;
     [SerializeField] private MachineController _dragonForge;
-    [SerializeField] private List<QuestUIElement> _questUIElements;
-    private Dictionary<Quest, QuestUIElement> _questUIMap;
-    
+    [SerializeField] private GameObject _questUIPrefab;
+    [SerializeField] private Transform _questUIContainer;
+    [SerializeField] private InventoryManager _inventoryManager;
+    [SerializeField] private List<BonusItem> _possibleBonuses;
+    private Dictionary<Quest, QuestUIElement> _questUIMap = new();
+    private bool _allQuestsAlreadyCompleted;
+
     private void OnEnable()
     {
         CraftingEvents.OnItemCrafted += UpdateQuestProgress;
@@ -21,16 +25,14 @@ public class QuestManager : MonoBehaviour
     
     private void Awake()
     {
-        _questUIMap = new Dictionary<Quest, QuestUIElement>();
-
-        for (int i = 0; i < _quests.Count; i++)
+        foreach (var quest in _quests)
         {
-            if (i < _questUIElements.Count)
-            {
-                _questUIMap[_quests[i]] = _questUIElements[i];
-                _quests[i].CurrentProgress = 0;
-                _questUIElements[i].UpdateUI(_quests[i].QuestName, _quests[i].QuestDescription, _quests[i].CurrentProgress, _quests[i].RequiredAmount);
-            }
+            quest.CurrentProgress = 0;
+            GameObject questUIObject = Instantiate(_questUIPrefab, _questUIContainer);
+            QuestUIElement questUI = questUIObject.GetComponent<QuestUIElement>();
+            
+            questUI.Initialize(quest.QuestName, quest.QuestDescription, quest.CurrentProgress, quest.RequiredAmount);
+            _questUIMap[quest] = questUI;
         }
     }
 
@@ -41,33 +43,59 @@ public class QuestManager : MonoBehaviour
             if (quest.RequiredItem == craftedItem && quest.CurrentProgress < quest.RequiredAmount)
             {
                 quest.CurrentProgress++;
-                Debug.Log($"Quest '{quest.QuestName}' progress: {quest.CurrentProgress}/{quest.RequiredAmount}");
 
                 if (_questUIMap.ContainsKey(quest))
                 {
-                    _questUIMap[quest].UpdateUI(quest.QuestName, quest.QuestDescription, quest.CurrentProgress, quest.RequiredAmount);
+                    _questUIMap[quest].UpdateUI(quest.CurrentProgress, quest.RequiredAmount);
                 }
-                
+
                 if (quest.CurrentProgress >= quest.RequiredAmount)
                 {
                     CompleteQuest(quest);
                 }
             }
         }
+        if (AllQuestsCompleted() && !_allQuestsAlreadyCompleted)
+        {
+            _allQuestsAlreadyCompleted = true;
+            GiveRandomBonus();
+        }
     }
 
     private void CompleteQuest(Quest quest)
     {
-        Debug.Log($"Quest '{quest.QuestName}' complete! Unlocking {quest.MachineToUnlock}");
+        ToastNotificationManager.Instance.ShowNotification($"You completed the '{quest.QuestName}' quest and unlocked {quest.MachineToUnlock}!");
 
         switch (quest.MachineToUnlock)
         {
             case MachineType.RuneCarver:
-                if (_runeCarver != null) _runeCarver.UnlockThisNewMachine();
+                _runeCarver?.UnlockThisNewMachine();
                 break;
             case MachineType.DragonForge:
-                if (_dragonForge != null) _dragonForge.UnlockThisNewMachine();
+                _dragonForge?.UnlockThisNewMachine();
                 break;
         }
+    }
+    
+    private bool AllQuestsCompleted()
+    {
+        foreach (var quest in _quests)
+        {
+            if (quest.CurrentProgress < quest.RequiredAmount)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void GiveRandomBonus()
+    {
+        if (_possibleBonuses.Count == 0) return;
+
+        BonusItem randomBonus = _possibleBonuses[Random.Range(0, _possibleBonuses.Count)];
+        _inventoryManager.AddBonusItem(randomBonus);
+
+        ToastNotificationManager.Instance.ShowNotification($"You received a bonus: {randomBonus.ItemName}!");
     }
 }
