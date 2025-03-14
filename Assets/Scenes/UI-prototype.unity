@@ -4016,6 +4016,10 @@ MonoBehaviour:
   _dragonForge: {fileID: 394123874}
   _questUIPrefab: {fileID: 1326861849260439166, guid: 2dd972a55ca49d2478b63ff6718662be, type: 3}
   _questUIContainer: {fileID: 1571236394}
+  _inventoryManager: {fileID: 1481010984}
+  _possibleBonuses:
+  - {fileID: 11400000, guid: a3bb8ee1a5cca054e98784036c002aec, type: 2}
+  - {fileID: 11400000, guid: a977e905ddaed0d49835500bbb98597c, type: 2}
 --- !u!4 &1356775702
 Transform:
   m_ObjectHideFlags: 0

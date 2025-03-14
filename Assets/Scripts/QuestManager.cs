@@ -8,7 +8,10 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private MachineController _dragonForge;
     [SerializeField] private GameObject _questUIPrefab;
     [SerializeField] private Transform _questUIContainer;
+    [SerializeField] private InventoryManager _inventoryManager;
+    [SerializeField] private List<BonusItem> _possibleBonuses;
     private Dictionary<Quest, QuestUIElement> _questUIMap = new();
+    private bool _allQuestsAlreadyCompleted;
 
     private void OnEnable()
     {
@@ -52,6 +55,11 @@ public class QuestManager : MonoBehaviour
                 }
             }
         }
+        if (AllQuestsCompleted() && !_allQuestsAlreadyCompleted)
+        {
+            _allQuestsAlreadyCompleted = true;
+            GiveRandomBonus();
+        }
     }
 
     private void CompleteQuest(Quest quest)
@@ -67,5 +75,27 @@ public class QuestManager : MonoBehaviour
                 _dragonForge?.UnlockThisNewMachine();
                 break;
         }
+    }
+    
+    private bool AllQuestsCompleted()
+    {
+        foreach (var quest in _quests)
+        {
+            if (quest.CurrentProgress < quest.RequiredAmount)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void GiveRandomBonus()
+    {
+        if (_possibleBonuses.Count == 0) return;
+
+        BonusItem randomBonus = _possibleBonuses[Random.Range(0, _possibleBonuses.Count)];
+        _inventoryManager.AddBonusItem(randomBonus);
+
+        ToastNotificationManager.Instance.ShowNotification($"You received a bonus: {randomBonus.ItemName}!");
     }
 }
