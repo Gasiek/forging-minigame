@@ -130,6 +130,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &125445842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2665906666941479714, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+  m_PrefabInstance: {fileID: 298802614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d57389798b64840b18956ff4ef9c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &175124225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -382,22 +393,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &238263486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1425357155229820292, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-  m_PrefabInstance: {fileID: 298802614}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &246403547 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1081587299541881788, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-  m_PrefabInstance: {fileID: 298802614}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &256605795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -623,7 +618,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294078581100373329, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Name
-      value: Forge (1)
+      value: Anvil
       objectReference: {fileID: 0}
     - target: {fileID: 1453613531399480587, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Pivot.x
@@ -705,22 +700,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6162554681378731296, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-      propertyPath: SlotImage
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _craftingSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _availableRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_craftingSlots.Array.data[1]'
       value: 
-      objectReference: {fileID: 246403547}
-    - target: {fileID: 6162554681378731296, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-      propertyPath: _emptySprite
+      objectReference: {fileID: 125445842}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[0]'
       value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6162554681378731296, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-      propertyPath: _quantityText
+      objectReference: {fileID: 11400000, guid: ab7ebfd10ed4c4b4d87a615ab099711b, type: 2}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[1]'
       value: 
-      objectReference: {fileID: 1285195801}
-    - target: {fileID: 6162554681378731296, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-      propertyPath: _quantityGameObject
-      value: 
-      objectReference: {fileID: 238263486}
+      objectReference: {fileID: 11400000, guid: 2040662a4f761de40b622901572de956, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -853,6 +852,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df9f673ce91673a45bec802857688e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &425344403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2665906666941479714, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+  m_PrefabInstance: {fileID: 501380583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d57389798b64840b18956ff4ef9c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &457312050
@@ -1046,7 +1056,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294078581100373329, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Name
-      value: Forge (2)
+      value: Enchanter
       objectReference: {fileID: 0}
     - target: {fileID: 1425357155229820292, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_IsActive
@@ -1148,6 +1158,26 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 1449064000}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _craftingSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _availableRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_craftingSlots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 425344403}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bd60f4904dd5db5418029ccfc430240c, type: 2}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 54f98d07b9b66c742ba38d06e4552648, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1682,6 +1712,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 143408541095486424, guid: f6cd67c818599d143b0e7af284208234, type: 3}
   m_PrefabInstance: {fileID: 710676275}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &769411453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2665906666941479714, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+  m_PrefabInstance: {fileID: 1225700035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d57389798b64840b18956ff4ef9c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &781439749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,7 +2448,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294078581100373329, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Name
-      value: Forge (3)
+      value: RuneCarver
       objectReference: {fileID: 0}
     - target: {fileID: 1453613531399480587, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Pivot.x
@@ -2505,6 +2546,26 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 1480857368}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _craftingSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _availableRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_craftingSlots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 769411453}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a076a57542c8034daa68200f311b518, type: 2}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 03bffb503942aba40930edcb42a5243c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2621,17 +2682,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1285195801 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7887441880795887961, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
-  m_PrefabInstance: {fileID: 298802614}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1335892355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2868,7 +2918,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294078581100373329, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Name
-      value: Forge (4)
+      value: DragonForge
       objectReference: {fileID: 0}
     - target: {fileID: 1453613531399480587, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Pivot.x
@@ -2966,6 +3016,18 @@ PrefabInstance:
       propertyPath: _quantityGameObject
       value: 
       objectReference: {fileID: 904508223}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _availableRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 473eb3190cf82534296f770d6f64c950, type: 2}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_availableRecipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a8e65f0c2b80196458bfda42b84eef2f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4334,7 +4396,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 294078581100373329, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Name
-      value: Forge
+      value: Smelter
       objectReference: {fileID: 0}
     - target: {fileID: 1453613531399480587, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: m_Pivot.x
@@ -4423,6 +4485,18 @@ PrefabInstance:
     - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
       propertyPath: _craftingSlots.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_craftingSlots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: _craftingSlotsCanvasGroup.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402201876111621529, guid: 3e5afc16e1e4acd42b3cf2b8b21e8080, type: 3}
+      propertyPath: '_craftingSlotsCanvasGroup.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

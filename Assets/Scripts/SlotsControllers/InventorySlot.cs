@@ -30,6 +30,11 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         UpdateUI();
     }
 
+    public void SetSpriteColor(Color color)
+    {
+        _slotImage.color = color;
+    }
+
     public void AddQuantity(int amount)
     {
         if (Item != null)
@@ -55,7 +60,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         Item = null;
         Quantity = 0;

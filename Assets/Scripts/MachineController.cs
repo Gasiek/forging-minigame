@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MachineController : MonoBehaviour, IMachine
 {
@@ -9,7 +11,21 @@ public class MachineController : MonoBehaviour, IMachine
     [SerializeField] private CraftedSlot _craftedSlot;
     [SerializeField] private Recipe[] _availableRecipes;
 
+    [SerializeField] private Button _craftButton;
+    [SerializeField] private TextMeshProUGUI _possibleOutputText;
+    [SerializeField] private Image _progressBar;
+    [SerializeField] private CanvasGroup[] _craftingSlotsCanvasGroup;
+
+    private Recipe _currentRecipe;
     public bool IsAvailable { get; private set; } = true;
+
+    private void Start()
+    {
+        _craftButton.interactable = false;
+        _progressBar.gameObject.SetActive(false);
+        _possibleOutputText.text = "";
+        SetCraftingSlotsInteractable(true);
+    }
 
     public void Initialize(InventoryManager inventoryManager)
     {
@@ -17,30 +33,39 @@ public class MachineController : MonoBehaviour, IMachine
         for (int i = 0; i < _craftingSlots.Length; i++)
         {
             _craftingSlots[i].Initialize(inventoryManager, i);
+            _craftingSlots[i].OnItemSlotChanged += OnItemSlotChanged;
         }
+
         _craftedSlot.Initialize(inventoryManager, 0);
     }
-    
-    public void TryCraft()
+
+    public void OnItemSlotChanged()
     {
-        if (_inventoryManager == null)
-        {
-            Debug.LogError("InventoryManager not set! Did you forget to call Initialize?");
-            return;
-        }
+        _currentRecipe = FindMatchingRecipe();
 
-        Recipe matchingRecipe = FindMatchingRecipe();
-
-        if (matchingRecipe != null)
+        if (_currentRecipe != null)
         {
-            StartCrafting(matchingRecipe);
+            _possibleOutputText.text = $"Can craft: {_currentRecipe.OutputItem.ItemName}";
+            _craftButton.interactable = true;
         }
         else
         {
-            Debug.LogWarning("No matching recipe found or missing ingredients.");
+            _possibleOutputText.text = "";
+            _craftButton.interactable = false;
         }
     }
-    
+
+    public void TryCraft()
+    {
+        if (_currentRecipe == null)
+        {
+            Debug.LogWarning("No valid recipe!");
+            return;
+        }
+
+        StartCrafting(_currentRecipe);
+    }
+
     private Recipe FindMatchingRecipe()
     {
         List<Item> itemsInSlots = new List<Item>();
@@ -63,7 +88,7 @@ public class MachineController : MonoBehaviour, IMachine
 
         return null;
     }
-    
+
     private bool ItemsMatchRecipe(List<Item> recipeItems, List<Item> slotItems)
     {
         if (recipeItems.Count != slotItems.Count)
@@ -87,11 +112,14 @@ public class MachineController : MonoBehaviour, IMachine
     {
         IsAvailable = false;
         Debug.Log($"Starting crafting: {recipe.OutputItem.ItemName}");
-        // lock the crafting slots
-        // foreach (var slot in _craftingSlots)
-        // {
-        //     slot.Clear();
-        // }
+
+        _craftButton.interactable = false;
+        foreach (var slot in _craftingSlots)
+        {
+            slot.OnItemSlotChanged -= OnItemSlotChanged;
+        }
+        _progressBar.gameObject.SetActive(true);
+        _progressBar.fillAmount = 0;
 
         float finalSuccessRate = recipe.SuccessRate;
         float finalCraftingTime = recipe.CraftingTime;
@@ -104,18 +132,39 @@ public class MachineController : MonoBehaviour, IMachine
 
         StartCoroutine(CraftingCoroutine(recipe.OutputItem, finalSuccessRate, finalCraftingTime));
     }
-    
+
 
     private IEnumerator CraftingCoroutine(Item outputItem, float successRate, float craftingTime)
     {
-        yield return new WaitForSeconds(craftingTime);
+        float timeElapsed = 0f;
+
+        while (timeElapsed < craftingTime)
+        {
+            timeElapsed += Time.deltaTime;
+            _progressBar.fillAmount = Mathf.Clamp01(timeElapsed / craftingTime);
+            yield return null;
+        }
+
+        CompleteCrafting(outputItem, successRate);
+    }
+
+    private void CompleteCrafting(Item outputItem, float successRate)
+    {
         foreach (var slot in _craftingSlots)
         {
             slot.Clear();
         }
+        foreach (var slot in _craftingSlots)
+        {
+            slot.OnItemSlotChanged += OnItemSlotChanged;
+        }
+
+        _progressBar.gameObject.SetActive(false);
+
         if (Random.Range(0f, 1f) <= successRate)
         {
             _craftedSlot.SetItem(outputItem, 1);
+            SetCraftingSlotsInteractable(true);
             Debug.Log($"{outputItem.ItemName} crafted successfully!");
         }
         else
@@ -123,6 +172,16 @@ public class MachineController : MonoBehaviour, IMachine
             Debug.LogWarning($"Crafting of {outputItem.ItemName} failed.");
         }
 
+        _possibleOutputText.text = "";
         IsAvailable = true;
+    }
+
+    private void SetCraftingSlotsInteractable(bool interactable)
+    {
+        foreach (var craftingSlotCanvasGroup in _craftingSlotsCanvasGroup)
+        {
+            craftingSlotCanvasGroup.alpha = interactable ? 1f : 0.5f;
+            craftingSlotCanvasGroup.blocksRaycasts = interactable;
+        }
     }
 }

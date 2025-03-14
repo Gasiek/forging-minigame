@@ -46,6 +46,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < _bonusSlots.Length; i++)
         {
+            if(_bonusSlots[i].IsEmpty) { continue; }
             if (_bonusSlots[i].Item.ItemName == bonusItem.ItemName) return;
         }
 

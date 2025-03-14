@@ -90,9 +90,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3418013194322130415, guid: 77659768423ab1946881301ad7254cf6, type: 3}
       propertyPath: m_Name
-      value: CraftingSlot
+      value: CraftedSlot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5161611502538319965, guid: 77659768423ab1946881301ad7254cf6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
