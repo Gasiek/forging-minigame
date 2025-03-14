@@ -45,7 +45,7 @@ public class MachineController : MonoBehaviour, IMachine
     {
         _currentRecipe = FindMatchingRecipe();
 
-        if (_currentRecipe != null)
+        if (_currentRecipe)
         {
             _possibleOutputText.text = _currentRecipe.OutputItem.ItemName;
             _craftButton.interactable = true;
@@ -74,7 +74,7 @@ public class MachineController : MonoBehaviour, IMachine
 
         foreach (var slot in _craftingSlots)
         {
-            if (slot.Item != null)
+            if (slot.Item)
             {
                 itemsInSlots.Add(slot.Item);
             }
@@ -169,12 +169,11 @@ public class MachineController : MonoBehaviour, IMachine
         if (Random.Range(0f, 1f) <= successRate)
         {
             _craftedSlot.SetItem(outputItem, 1);
-            Debug.Log($"{outputItem.ItemName} crafted successfully!");
             CraftingEvents.ItemCrafted(outputItem);
         }
         else
         {
-            Debug.LogWarning($"Crafting of {outputItem.ItemName} failed.");
+            ToastNotificationManager.Instance.ShowNotification($"Crafting of {outputItem.ItemName} failed.");
         }
 
         SetCraftingSlotsInteractable(true);
