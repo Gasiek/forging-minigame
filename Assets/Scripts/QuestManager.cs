@@ -41,7 +41,6 @@ public class QuestManager : MonoBehaviour
             if (quest.RequiredItem == craftedItem && quest.CurrentProgress < quest.RequiredAmount)
             {
                 quest.CurrentProgress++;
-                Debug.Log($"Quest '{quest.QuestName}' progress: {quest.CurrentProgress}/{quest.RequiredAmount}");
 
                 if (_questUIMap.ContainsKey(quest))
                 {
@@ -58,8 +57,7 @@ public class QuestManager : MonoBehaviour
 
     private void CompleteQuest(Quest quest)
     {
-        Debug.Log($"Quest '{quest.QuestName}' complete! Unlocking {quest.MachineToUnlock}");
-
+        ToastNotificationManager.Instance.ShowNotification($"You have completed {quest.QuestName} quest, and unlocked {quest.MachineToUnlock}");
         switch (quest.MachineToUnlock)
         {
             case MachineType.RuneCarver:
