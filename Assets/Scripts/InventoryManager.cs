@@ -55,6 +55,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (_bonusSlots[i].IsEmpty)
             {
+                _bonusUIElements[i].gameObject.SetActive(true);
                 _bonusUIElements[i].UpdateUI(bonusItem.ItemName, bonusItem.Description);
                 _bonusSlots[i].SetItem(bonusItem, 1);
                 return;
