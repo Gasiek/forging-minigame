@@ -64,6 +64,11 @@ public class MachineController : MonoBehaviour, IMachine
             Debug.LogWarning("No valid recipe!");
             return;
         }
+        if (!_craftedSlot.IsEmpty)
+        {
+            Debug.LogWarning("Previously crafted item not collected!");
+            return;
+        }
 
         StartCrafting(_currentRecipe);
     }
