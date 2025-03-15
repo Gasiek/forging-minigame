@@ -22,7 +22,7 @@ This project is a Unity-based forging mini-game built to demonstrate a data-driv
 ## How to Run the Project
 
 1. **Open the Project:**  
-   - Open Unity (version 6000.0.32f1 or later recommended) and select **Open Project** to load the repository.
+   - Open Unity (version 6000.0.32f1 or later recommended) and select **Open Project** to load the repository. Game was designed primarly for Full HD resolution (1920x1080).
 
 2. **Scene Setup:**  
    - The Main scene contains the UI elements (inventory panel, machine list, quest/bonus display) and managers (`GameManager`, `InventoryManager`, `QuestManager`).
@@ -85,6 +85,9 @@ This project is a Unity-based forging mini-game built to demonstrate a data-driv
 
 - **Editor Testing:**  
   - Use Unity’s Play mode to test the drag-and-drop functionality, crafting processes, and quest progression.
+
+- **Testing in Web Browser:**  
+  - You can also play the game preview on WebGL build https://gasiek.github.io/portfolio/forge-minigame/.
 
 - **Modularity:**  
   - Machines can be added or modified without altering the core inventory or quest systems.
