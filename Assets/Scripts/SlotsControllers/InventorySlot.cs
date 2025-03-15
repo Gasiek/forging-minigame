@@ -13,10 +13,8 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Item Item { get; private set; }
     public int Quantity { get; private set; }
     public bool IsEmpty => Item == null || Quantity <= 0;
-    protected InventoryManager _inventoryManager;
+    private InventoryManager _inventoryManager;
     private int _slotIndex;
-    private Item _oldItem;
-    private int _oldQuantity;
 
     public void Initialize(InventoryManager inventoryManager, int slotIndex)
     {

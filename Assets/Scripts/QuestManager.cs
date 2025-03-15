@@ -8,9 +8,9 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private MachineController _dragonForge;
     [SerializeField] private GameObject _questUIPrefab;
     [SerializeField] private Transform _questUIContainer;
-    [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private List<BonusItem> _possibleBonuses;
     private Dictionary<Quest, QuestUIElement> _questUIMap = new();
+    private InventoryManager _inventoryManager;
     private bool _allQuestsAlreadyCompleted;
 
     private void OnEnable()
@@ -34,6 +34,11 @@ public class QuestManager : MonoBehaviour
             questUI.Initialize(quest.QuestName, quest.QuestDescription, quest.CurrentProgress, quest.RequiredAmount);
             _questUIMap[quest] = questUI;
         }
+    }
+    
+    public void Initialize(InventoryManager inventoryManager)
+    {
+        _inventoryManager = inventoryManager;
     }
 
     private void UpdateQuestProgress(Item craftedItem)

@@ -60,8 +60,8 @@ This project is a Unity-based forging mini-game built to demonstrate a data-driv
 ## Unique Code Decisions
 
 - **Dependency Injection:**  
-  - The `GameManager` initializes each machine by injecting the `InventoryManager` reference into them, keeping the system decoupled and easier to test.
-
+  - The `GameManager` initializes each machine, as well as the `QuestManager` and `StartingInventoryGenerator`, by injecting the `InventoryManager` reference into them. This approach decouples the systems, makes testing easier, and ensures consistency across the project.
+  
 - **Singletons vs. DI:**  
   - While `DragIcon` and `ToastNotificationManager` are implemented as singletons (for ease of access in UI interactions), core game systems like the `InventoryManager` are injected via initialization, promoting loose coupling.
 

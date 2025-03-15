@@ -10,14 +10,19 @@ public struct StartingInventoryItem
 
 public class StartingInventoryGenerator : MonoBehaviour
 {
-    [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private StartingInventoryItem[] _startingItems;
     [SerializeField] private BonusItem[] _bonusItems;
     [Range(0f, 1f)] [SerializeField] private float _bonusItemDropChance = 0.25f;
+    private InventoryManager _inventoryManager;
 
     private void Start()
     {
         GenerateStartingInventory();
+    }
+    
+    public void Initialize(InventoryManager inventoryManager)
+    {
+        _inventoryManager = inventoryManager;
     }
 
     private void GenerateStartingInventory()

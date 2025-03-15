@@ -780,6 +780,8 @@ MonoBehaviour:
   - {fileID: 1817927170}
   - {fileID: 1093760800}
   - {fileID: 394123874}
+  _questManager: {fileID: 1356775701}
+  _startingInventoryGenerator: {fileID: 1481010983}
 --- !u!4 &226382292
 Transform:
   m_ObjectHideFlags: 0
@@ -4016,7 +4018,6 @@ MonoBehaviour:
   _dragonForge: {fileID: 394123874}
   _questUIPrefab: {fileID: 1326861849260439166, guid: 2dd972a55ca49d2478b63ff6718662be, type: 3}
   _questUIContainer: {fileID: 1571236394}
-  _inventoryManager: {fileID: 1481010984}
   _possibleBonuses:
   - {fileID: 11400000, guid: a3bb8ee1a5cca054e98784036c002aec, type: 2}
   - {fileID: 11400000, guid: a977e905ddaed0d49835500bbb98597c, type: 2}
@@ -4266,7 +4267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1441c8c7175134c8ff4f16abefca25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryManager: {fileID: 1481010984}
   _startingItems:
   - Item: {fileID: 11400000, guid: 31137e47078546949ab07a3066a1e0de, type: 2}
     MinQuantity: 3
@@ -7722,9 +7722,9 @@ SceneRoots:
   - {fileID: 1259932976}
   - {fileID: 2000495013}
   - {fileID: 1481010985}
-  - {fileID: 226382292}
   - {fileID: 1356775702}
   - {fileID: 1297335227}
   - {fileID: 1844342294}
   - {fileID: 1745075881}
   - {fileID: 1327645097}
+  - {fileID: 226382292}
